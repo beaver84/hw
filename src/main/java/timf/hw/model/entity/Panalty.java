@@ -33,7 +33,7 @@ public class Panalty {
     @Column(name = "panalty_content")
     private String panaltyContent;
 
-    @OneToOne(mappedBy = "VOC")
+    @OneToOne(mappedBy = "panalty")
     private VOC voc;
 
     @Builder

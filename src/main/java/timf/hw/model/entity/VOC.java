@@ -26,7 +26,7 @@ public class VOC {
     private long vocSeqno;
 
     @Column(name = "attributable_code")
-    private String attributableCode;
+    private int attributableCode;
 
     @Column(name = "attributable_person")
     private String attributablePerson;
@@ -46,10 +46,13 @@ public class VOC {
     private Compensation compensation;
 
     @Builder
-    public VOC(long vocSeqno, String attributablePerson, String attributableContent, boolean objectionYn) {
+    public VOC(long vocSeqno, int attributableCode, String attributablePerson, String attributableContent, boolean objectionYn, Panalty panalty, Compensation compensation) {
         this.vocSeqno = vocSeqno;
+        this.attributableCode = attributableCode;
         this.attributablePerson = attributablePerson;
         this.attributableContent = attributableContent;
         this.objectionYn = objectionYn;
+        this.panalty = panalty;
+        this.compensation = compensation;
     }
 }

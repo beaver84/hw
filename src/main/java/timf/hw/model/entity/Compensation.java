@@ -31,7 +31,7 @@ public class Compensation {
     @Column(name = "compensation_content")
     private int compensationContent;
 
-    @OneToOne(mappedBy = "VOC")
+    @OneToOne(mappedBy = "compensation")
     private VOC voc;
 
     @Builder

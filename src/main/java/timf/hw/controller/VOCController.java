@@ -1,6 +1,7 @@
 package timf.hw.controller;
 
 import lombok.RequiredArgsConstructor;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -9,9 +10,12 @@ import timf.hw.model.dto.CompensationRequest;
 import timf.hw.model.dto.CompensationResponse;
 import timf.hw.model.dto.PanaltyRequest;
 import timf.hw.model.dto.PanaltyResponse;
+import timf.hw.model.dto.VOCAllResponse;
 import timf.hw.model.dto.VOCRequest;
 import timf.hw.model.dto.VOCResponse;
 import timf.hw.service.VOCService;
+
+import java.util.List;
 
 @RequiredArgsConstructor
 @RestController
@@ -39,5 +43,11 @@ public class VOCController {
             @RequestBody CompensationRequest compensationRequest
     ){
         return vOCService.addCompensation(compensationRequest);
+    }
+
+    @GetMapping("/v1/voc/all")
+    public List<VOCAllResponse> getVocAllResponse(
+    ){
+        return vOCService.getVocAllResponse();
     }
 }
