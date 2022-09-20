@@ -10,22 +10,22 @@ import lombok.Setter;
 @NoArgsConstructor
 public class VOCRequest {
 
-    private long voc_seqno;
+    private long vocSeqno;
 
-    private String attributable_person;
+    private String attributablePerson;
 
-    private String attributable_content;
+    private String attributableContent;
 
-    private boolean confirm_yn;
+    private boolean confirmYn;
 
-    private boolean objection_yn;
+    private boolean objectionYn;
 
     @Builder
-    public VOCRequest(long voc_seqno, String attributable_person, String attributable_content, boolean confirm_yn, boolean objection_yn) {
-        this.voc_seqno = voc_seqno;
-        this.attributable_person = attributable_person;
-        this.attributable_content = attributable_content;
-        this.confirm_yn = confirm_yn;
-        this.objection_yn = objection_yn;
+    public VOCRequest(long vocSeqno, String attributablePerson, String attributableContent, boolean confirmYn, boolean objectionYn) {
+        this.vocSeqno = vocSeqno;
+        this.attributablePerson = attributablePerson;
+        this.attributableContent = attributableContent;
+        this.confirmYn = confirmYn;
+        this.objectionYn = objectionYn;
     }
 }

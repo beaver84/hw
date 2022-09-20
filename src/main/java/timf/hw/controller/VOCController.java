@@ -18,8 +18,7 @@ public class VOCController {
 
     @PostMapping("/v1/VOC")
     public VOCResponse addVOC(
-        @RequestBody
-        VOCRequest vOCRequest
+        @RequestBody VOCRequest vOCRequest
     ){
         return vOCService.addVOC(vOCRequest);
     }
