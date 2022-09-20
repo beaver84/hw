@@ -10,6 +10,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 @Getter
@@ -31,6 +32,9 @@ public class Panalty {
 
     @Column(name = "panalty_content")
     private String panaltyContent;
+
+    @OneToOne(mappedBy = "VOC")
+    private VOC voc;
 
     @Builder
     public Panalty(long panaltySeqno, long vocSeqno, boolean confirmYn, String panaltyContent) {

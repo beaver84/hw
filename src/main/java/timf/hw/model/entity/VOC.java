@@ -10,6 +10,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 @Getter
@@ -23,6 +25,9 @@ public class VOC {
     @Column(name = "voc_seqno")
     private long vocSeqno;
 
+    @Column(name = "attributable_code")
+    private String attributableCode;
+
     @Column(name = "attributable_person")
     private String attributablePerson;
 
@@ -31,6 +36,14 @@ public class VOC {
 
     @Column(name = "objection_yn")
     private boolean objectionYn;
+
+    @OneToOne
+    @JoinColumn(name = "panalty_id")
+    private Panalty panalty;
+
+    @OneToOne
+    @JoinColumn(name = "compensation_id")
+    private Compensation compensation;
 
     @Builder
     public VOC(long vocSeqno, String attributablePerson, String attributableContent, boolean objectionYn) {

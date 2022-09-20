@@ -1,6 +1,7 @@
 CREATE TABLE `VOC` (
                        `voc_seqno`	BIGINT UNSIGNED PRIMARY KEY NOT NULL,
-                       `attributable_person`	VARCHAR(20)	NULL,
+                       `attributable_code` int NULL,
+                       `attributable_name`	VARCHAR(20)	NULL,
                        `attributable_content`	VARCHAR(200)	NULL,
                        `objection_yn`	TinyInt(1)	NULL
 );

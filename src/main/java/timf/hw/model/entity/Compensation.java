@@ -10,6 +10,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 @Getter
@@ -29,6 +30,9 @@ public class Compensation {
 
     @Column(name = "compensation_content")
     private int compensationContent;
+
+    @OneToOne(mappedBy = "VOC")
+    private VOC voc;
 
     @Builder
     public Compensation(long compensationSeqno, long vocSeqno, int compensationContent) {
