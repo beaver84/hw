@@ -9,6 +9,7 @@ import timf.hw.model.dto.PanaltyResponse;
 import timf.hw.model.dto.VOCAllResponse;
 import timf.hw.model.dto.VOCRequest;
 import timf.hw.model.dto.VOCResponse;
+import timf.hw.model.dto.VOCShortResponse;
 import timf.hw.model.entity.Compensation;
 import timf.hw.model.entity.Panalty;
 import timf.hw.model.entity.VOC;
@@ -19,6 +20,7 @@ import timf.hw.service.VOCService;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 import static org.reflections.util.ConfigurationBuilder.*;
 
@@ -96,5 +98,47 @@ public class VOCServiceImpl implements VOCService {
             result.add(vocResponse);
         }
         return result;
+    }
+
+    @Override
+    public VOCShortResponse getVocResponse(long voc_id) {
+        Optional<VOC> voc = vOCRepository.findById(voc_id);
+        VOC findVoc = voc.get();
+
+        List<Panalty> panaltys = panaltyRepository.findByVocSeqno(voc_id);
+        List<PanaltyResponse> panaltyResponseList = new ArrayList<>();
+        for (Panalty panalty : panaltys) {
+            PanaltyResponse response = PanaltyResponse.builder()
+                    .confirmYn(panalty.isConfirmYn())
+                    .vocSeqno(panalty.getVocSeqno())
+                    .panaltyContent(panalty.getPanaltyContent())
+                    .panaltySeqno(panalty.getPanaltySeqno())
+                    .build();
+            panaltyResponseList.add(response);
+        }
+
+        List<Compensation> compensations = compensationRepository.findByVocSeqno(voc_id);
+        List<CompensationResponse> compensationResponseList = new ArrayList<>();
+        for (Compensation compensation : compensations) {
+            CompensationResponse response = CompensationResponse.builder()
+                    .vocSeqno(compensation.getVocSeqno())
+                    .compensationContent(compensation.getCompensationContent())
+                    .compensationSeqno(compensation.getCompensationSeqno())
+                    .build();
+            compensationResponseList.add(response);
+        }
+
+        findVoc.setPanalty(panaltys);
+        findVoc.setCompensation(compensations);
+
+        return VOCShortResponse.builder()
+                .compensations(compensationResponseList)
+                .panaltys(panaltyResponseList)
+                .vocSeqno(voc_id)
+                .attributableCode(findVoc.getAttributableCode())
+                .objectionYn(findVoc.isObjectionYn())
+                .attributableContent(findVoc.getAttributableContent())
+                .attributablePerson(findVoc.getAttributablePerson())
+                .build();
     }
 }

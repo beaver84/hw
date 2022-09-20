@@ -7,6 +7,7 @@ import timf.hw.model.dto.PanaltyResponse;
 import timf.hw.model.dto.VOCAllResponse;
 import timf.hw.model.dto.VOCRequest;
 import timf.hw.model.dto.VOCResponse;
+import timf.hw.model.dto.VOCShortResponse;
 
 import java.util.List;
 
@@ -18,4 +19,6 @@ public interface VOCService {
     CompensationResponse addCompensation(CompensationRequest compensationRequest);
 
     List<VOCAllResponse> getVocAllResponse();
+
+    VOCShortResponse getVocResponse(long voc_id);
 }
