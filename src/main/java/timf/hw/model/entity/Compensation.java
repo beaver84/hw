@@ -7,9 +7,12 @@ import lombok.Setter;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
@@ -22,7 +25,7 @@ public class Compensation {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "panalty_seqno")
+    @Column(name = "compensation_seqno")
     private long compensationSeqno;
 
     @Column(name = "voc_seqno")
@@ -31,13 +34,15 @@ public class Compensation {
     @Column(name = "compensation_content")
     private int compensationContent;
 
-    @OneToOne(mappedBy = "compensation")
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "voc_seqno", insertable = false, updatable = false)
     private VOC voc;
 
     @Builder
-    public Compensation(long compensationSeqno, long vocSeqno, int compensationContent) {
+    public Compensation(long compensationSeqno, long vocSeqno, int compensationContent, VOC voc) {
         this.compensationSeqno = compensationSeqno;
         this.vocSeqno = vocSeqno;
         this.compensationContent = compensationContent;
+        this.voc = voc;
     }
 }

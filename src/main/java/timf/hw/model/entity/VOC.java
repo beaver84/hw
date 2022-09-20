@@ -11,8 +11,11 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
+import java.util.ArrayList;
+import java.util.List;
 
 @Getter
 @Setter
@@ -37,22 +40,20 @@ public class VOC {
     @Column(name = "objection_yn")
     private boolean objectionYn;
 
-    @OneToOne
-    @JoinColumn(name = "panalty_id")
-    private Panalty panalty;
+    @OneToMany(mappedBy = "compensationSeqno")
+    private List<Compensation> compensation = new ArrayList<>();
 
-    @OneToOne
-    @JoinColumn(name = "compensation_id")
-    private Compensation compensation;
+    @OneToMany(mappedBy = "panaltySeqno")
+    private List<Panalty> panalty = new ArrayList<>();
 
     @Builder
-    public VOC(long vocSeqno, int attributableCode, String attributablePerson, String attributableContent, boolean objectionYn, Panalty panalty, Compensation compensation) {
+    public VOC(long vocSeqno, int attributableCode, String attributablePerson, String attributableContent, boolean objectionYn, List<Compensation> compensation, List<Panalty> panalty) {
         this.vocSeqno = vocSeqno;
         this.attributableCode = attributableCode;
         this.attributablePerson = attributablePerson;
         this.attributableContent = attributableContent;
         this.objectionYn = objectionYn;
-        this.panalty = panalty;
         this.compensation = compensation;
+        this.panalty = panalty;
     }
 }
