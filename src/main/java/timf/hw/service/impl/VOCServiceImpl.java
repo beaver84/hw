@@ -17,18 +17,18 @@ public class VOCServiceImpl implements VOCService {
     @Override
     public VOCResponse addVOC(VOCRequest vOCRequest) {
         VOC vocToEntity = VOC.builder()
-                .attributablePerson(vOCRequest.getAttributable_person())
-                .attributableContent(vOCRequest.getAttributable_content())
-                .confirmYn(vOCRequest.isConfirm_yn())
-                .objectionYn(vOCRequest.isObjection_yn())
+                .attributablePerson(vOCRequest.getAttributablePerson())
+                .attributableContent(vOCRequest.getAttributableContent())
+                .confirmYn(vOCRequest.isConfirmYn())
+                .objectionYn(vOCRequest.isObjectionYn())
                 .build();
         VOC saveResult = vOCRepository.save(vocToEntity);
 
         return VOCResponse.builder()
-                .attributable_content(saveResult.getAttributableContent())
-                .attributable_person(saveResult.getAttributablePerson())
-                .confirm_yn(saveResult.isConfirmYn())
-                .objection_yn(saveResult.isObjectionYn())
+                .attributableContent(saveResult.getAttributableContent())
+                .attributablePerson(saveResult.getAttributablePerson())
+                .confirmYn(saveResult.isConfirmYn())
+                .objectionYn(saveResult.isObjectionYn())
                 .build();
     }
 }
