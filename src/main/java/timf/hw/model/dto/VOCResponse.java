@@ -21,7 +21,7 @@ public class VOCResponse {
     private boolean objectionYn;
 
     @Builder
-    public VOCResponse(long vocSeqno, String attributablePerson, String attributableContent, boolean confirmYn, boolean objectionYn) {
+    public VOCResponse(long vocSeqno, String attributablePerson, String attributableContent, boolean objectionYn) {
         this.vocSeqno = vocSeqno;
         this.attributablePerson = attributablePerson;
         this.attributableContent = attributableContent;

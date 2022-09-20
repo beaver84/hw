@@ -16,27 +16,24 @@ import javax.persistence.Table;
 @Setter
 @NoArgsConstructor
 @Entity
-@Table(name = "VOC")
-public class VOC {
+@Table(name = "Compensation")
+public class Compensation {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "panalty_seqno")
+    private long compensationSeqno;
+
     @Column(name = "voc_seqno")
     private long vocSeqno;
 
-    @Column(name = "attributable_person")
-    private String attributablePerson;
-
-    @Column(name = "attributable_content")
-    private String attributableContent;
-
-    @Column(name = "objection_yn")
-    private boolean objectionYn;
+    @Column(name = "compensation_content")
+    private int compensationContent;
 
     @Builder
-    public VOC(long vocSeqno, String attributablePerson, String attributableContent, boolean objectionYn) {
+    public Compensation(long compensationSeqno, long vocSeqno, int compensationContent) {
+        this.compensationSeqno = compensationSeqno;
         this.vocSeqno = vocSeqno;
-        this.attributablePerson = attributablePerson;
-        this.attributableContent = attributableContent;
-        this.objectionYn = objectionYn;
+        this.compensationContent = compensationContent;
     }
 }

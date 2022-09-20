@@ -10,22 +10,16 @@ import lombok.Setter;
 @NoArgsConstructor
 public class VOCRequest {
 
-    private long vocSeqno;
-
     private String attributablePerson;
 
     private String attributableContent;
 
-    private boolean confirmYn;
-
     private boolean objectionYn;
 
     @Builder
-    public VOCRequest(long vocSeqno, String attributablePerson, String attributableContent, boolean confirmYn, boolean objectionYn) {
-        this.vocSeqno = vocSeqno;
+    public VOCRequest(String attributablePerson, String attributableContent, boolean objectionYn) {
         this.attributablePerson = attributablePerson;
         this.attributableContent = attributableContent;
-        this.confirmYn = confirmYn;
         this.objectionYn = objectionYn;
     }
 }
