@@ -2,6 +2,7 @@ package timf.hw.controller;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -13,6 +14,7 @@ import timf.hw.model.dto.PanaltyResponse;
 import timf.hw.model.dto.VOCAllResponse;
 import timf.hw.model.dto.VOCRequest;
 import timf.hw.model.dto.VOCResponse;
+import timf.hw.model.dto.VOCShortResponse;
 import timf.hw.service.VOCService;
 
 import java.util.List;
@@ -49,5 +51,12 @@ public class VOCController {
     public List<VOCAllResponse> getVocAllResponse(
     ){
         return vOCService.getVocAllResponse();
+    }
+
+    @GetMapping("/v1/voc/{voc_id}")
+    public VOCShortResponse getVocResponse(
+            @PathVariable long voc_id
+    ){
+        return vOCService.getVocResponse(voc_id);
     }
 }
