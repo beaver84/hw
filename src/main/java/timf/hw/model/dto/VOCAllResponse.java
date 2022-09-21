@@ -4,6 +4,7 @@ import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import timf.hw.model.enums.AttributableCode;
 
 @Getter
 @Setter
@@ -12,7 +13,7 @@ public class VOCAllResponse {
 
     private long vocSeqno;
 
-    private int attributableCode;
+    private AttributableCode attributableCode;
 
     private String attributablePerson;
 
@@ -23,7 +24,7 @@ public class VOCAllResponse {
     private int compensationContent;
 
     @Builder
-    public VOCAllResponse(long vocSeqno, int attributableCode, String attributablePerson, String attributableContent, boolean objectionYn, PanaltyResponse panaltyResponse, CompensationResponse compensationResponse, int compensationContent) {
+    public VOCAllResponse(long vocSeqno, AttributableCode attributableCode, String attributablePerson, String attributableContent, boolean objectionYn, PanaltyResponse panaltyResponse, CompensationResponse compensationResponse, int compensationContent) {
         this.vocSeqno = vocSeqno;
         this.attributableCode = attributableCode;
         this.attributablePerson = attributablePerson;

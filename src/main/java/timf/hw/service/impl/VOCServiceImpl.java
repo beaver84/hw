@@ -35,6 +35,7 @@ public class VOCServiceImpl implements VOCService {
     @Override
     public VOCResponse addVOC(VOCRequest vOCRequest) {
         VOC vocToEntity = VOC.builder()
+                .attributableCode(vOCRequest.getAttributableCode())
                 .attributablePerson(vOCRequest.getAttributablePerson())
                 .attributableContent(vOCRequest.getAttributableContent())
                 .objectionYn(vOCRequest.isObjectionYn())
@@ -42,8 +43,9 @@ public class VOCServiceImpl implements VOCService {
         VOC saveResult = vOCRepository.save(vocToEntity);
 
         return VOCResponse.builder()
-                .attributableContent(saveResult.getAttributableContent())
+                .attributableCode(saveResult.getAttributableCode())
                 .attributablePerson(saveResult.getAttributablePerson())
+                .attributableContent(saveResult.getAttributableContent())
                 .objectionYn(saveResult.isObjectionYn())
                 .vocSeqno(saveResult.getVocSeqno())
                 .build();

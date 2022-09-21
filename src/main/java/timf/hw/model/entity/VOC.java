@@ -4,15 +4,14 @@ import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import timf.hw.model.enums.AttributableCode;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
-import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import java.util.ArrayList;
 import java.util.List;
@@ -29,7 +28,7 @@ public class VOC {
     private long vocSeqno;
 
     @Column(name = "attributable_code")
-    private int attributableCode;
+    private AttributableCode attributableCode;
 
     @Column(name = "attributable_person")
     private String attributablePerson;
@@ -47,7 +46,7 @@ public class VOC {
     private List<Panalty> panalty = new ArrayList<>();
 
     @Builder
-    public VOC(long vocSeqno, int attributableCode, String attributablePerson, String attributableContent, boolean objectionYn, List<Compensation> compensation, List<Panalty> panalty) {
+    public VOC(long vocSeqno, AttributableCode attributableCode, String attributablePerson, String attributableContent, boolean objectionYn, List<Compensation> compensation, List<Panalty> panalty) {
         this.vocSeqno = vocSeqno;
         this.attributableCode = attributableCode;
         this.attributablePerson = attributablePerson;

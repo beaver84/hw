@@ -6,6 +6,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import timf.hw.model.entity.Compensation;
 import timf.hw.model.entity.Panalty;
+import timf.hw.model.enums.AttributableCode;
 
 import java.util.List;
 
@@ -16,7 +17,7 @@ public class VOCShortResponse {
 
     private long vocSeqno;
 
-    private int attributableCode;
+    private AttributableCode attributableCode;
 
     private String attributablePerson;
 
@@ -29,7 +30,7 @@ public class VOCShortResponse {
     private List<PanaltyResponse> panaltys;
 
     @Builder
-    public VOCShortResponse(long vocSeqno, int attributableCode, String attributablePerson, String attributableContent, boolean objectionYn, List<CompensationResponse> compensations, List<PanaltyResponse> panaltys) {
+    public VOCShortResponse(long vocSeqno, AttributableCode attributableCode, String attributablePerson, String attributableContent, boolean objectionYn, List<CompensationResponse> compensations, List<PanaltyResponse> panaltys) {
         this.vocSeqno = vocSeqno;
         this.attributableCode = attributableCode;
         this.attributablePerson = attributablePerson;
