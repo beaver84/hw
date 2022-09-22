@@ -18,6 +18,7 @@ import timf.hw.repository.PanaltyRepository;
 import timf.hw.repository.VOCRepository;
 import timf.hw.service.VOCService;
 
+import javax.persistence.EntityNotFoundException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -55,7 +56,7 @@ public class VOCServiceImpl implements VOCService {
     public PanaltyResponse addPanalty(PanaltyRequest panaltyRequest) {
         Panalty panaltyToEntity = Panalty.builder()
                 .vocSeqno(panaltyRequest.getVocSeqno())
-                .confirmYn(panaltyRequest.isConfirmYn())
+                .confirmYn(false)
                 .panaltyContent(panaltyRequest.getPanaltyContent())
                 .build();
         Panalty saveResult = panaltyRepository.save(panaltyToEntity);
@@ -103,11 +104,11 @@ public class VOCServiceImpl implements VOCService {
     }
 
     @Override
-    public VOCShortResponse getVocResponse(long voc_id) {
-        Optional<VOC> voc = vOCRepository.findById(voc_id);
+    public VOCShortResponse getVocResponse(long vocId) {
+        Optional<VOC> voc = vOCRepository.findById(vocId);
         VOC findVoc = voc.get();
 
-        List<Panalty> panaltys = panaltyRepository.findByVocSeqno(voc_id);
+        List<Panalty> panaltys = panaltyRepository.findByVocSeqno(vocId);
         List<PanaltyResponse> panaltyResponseList = new ArrayList<>();
         for (Panalty panalty : panaltys) {
             PanaltyResponse response = PanaltyResponse.builder()
@@ -119,7 +120,7 @@ public class VOCServiceImpl implements VOCService {
             panaltyResponseList.add(response);
         }
 
-        List<Compensation> compensations = compensationRepository.findByVocSeqno(voc_id);
+        List<Compensation> compensations = compensationRepository.findByVocSeqno(vocId);
         List<CompensationResponse> compensationResponseList = new ArrayList<>();
         for (Compensation compensation : compensations) {
             CompensationResponse response = CompensationResponse.builder()
@@ -136,11 +137,26 @@ public class VOCServiceImpl implements VOCService {
         return VOCShortResponse.builder()
                 .compensations(compensationResponseList)
                 .panaltys(panaltyResponseList)
-                .vocSeqno(voc_id)
+                .vocSeqno(vocId)
                 .attributableCode(findVoc.getAttributableCode())
                 .objectionYn(findVoc.isObjectionYn())
                 .attributableContent(findVoc.getAttributableContent())
                 .attributablePerson(findVoc.getAttributablePerson())
+                .build();
+    }
+
+    @Override
+    public PanaltyResponse modifyPanaltyConfirm(long panaltyId, boolean panaltycConfirmYn) {
+        Panalty findPanalty = panaltyRepository.findById(panaltyId).orElseThrow(EntityNotFoundException::new);
+
+        findPanalty.setConfirmYn(panaltycConfirmYn);
+        Panalty savedPanalty = panaltyRepository.save(findPanalty);
+
+        return PanaltyResponse.builder()
+                .panaltySeqno(panaltyId)
+                .vocSeqno(savedPanalty.getVocSeqno())
+                .confirmYn(savedPanalty.isConfirmYn())
+                .panaltyContent(savedPanalty.getPanaltyContent())
                 .build();
     }
 }

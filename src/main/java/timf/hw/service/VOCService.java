@@ -20,5 +20,7 @@ public interface VOCService {
 
     List<VOCAllResponse> getVocAllResponse();
 
-    VOCShortResponse getVocResponse(long voc_id);
+    VOCShortResponse getVocResponse(long vocId);
+
+    PanaltyResponse modifyPanaltyConfirm(long panaltyId, boolean panaltyConfirmYn);
 }

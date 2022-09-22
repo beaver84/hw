@@ -5,8 +5,10 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import timf.hw.model.dto.CompensationRequest;
 import timf.hw.model.dto.CompensationResponse;
@@ -61,8 +63,17 @@ public class VOCController {
     @GetMapping("/v1/voc/{voc_id}")
     @ApiModelProperty(value = "VOC 단건 조회(하위 panalty, compensation 목록 포함)", notes = "VOC 단건을 조회(하위 panalty, compensation 목록 포함)한다.")
     public VOCShortResponse getVocResponse(
-        @PathVariable long voc_id
+        @PathVariable("voc_id") long vocId
     ){
-        return vOCService.getVocResponse(voc_id);
+        return vOCService.getVocResponse(vocId);
+    }
+
+    @PutMapping("/v1/panalty/confirm")
+    @ApiModelProperty(value = "배송기사 확인", notes = "배송기사 확인 여부를 업데이트한다.")
+    public PanaltyResponse modifyPanaltyConfirm(
+        @RequestParam boolean panaltyConfirmYn,
+        @RequestParam long panaltyId
+    ){
+        return vOCService.modifyPanaltyConfirm(panaltyId, panaltyConfirmYn);
     }
 }

@@ -1,5 +1,6 @@
 package timf.hw.model.dto;
 
+import io.swagger.annotations.ApiModelProperty;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -11,12 +12,16 @@ import timf.hw.model.enums.AttributableCode;
 @NoArgsConstructor
 public class VOCRequest {
 
+    @ApiModelProperty("귀책 코드")
     private AttributableCode attributableCode;
 
+    @ApiModelProperty("귀책 당사자")
     private String attributablePerson;
 
+    @ApiModelProperty("귀책 내용")
     private String attributableContent;
 
+    @ApiModelProperty("이의제기 여부")
     private boolean objectionYn;
 
     @Builder
